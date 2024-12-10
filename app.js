@@ -1,6 +1,5 @@
 const express = require('express');
 const server = express();
-
 const FilmsRouter = require('./routes/film')
 
 const HOST = process.env.HOST
@@ -16,3 +15,4 @@ server.get('/', (req, res) => {
 })
 
 server.use('/movies', FilmsRouter)
+
