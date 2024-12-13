@@ -17,7 +17,7 @@ function index(req, res) {
 function show(req, res) {
     const id = req.params.id;
     const sql = `SELECT * FROM movies WHERE id=?`;
-    const reviewsSql = `SELECT * FROM reviews WHERE movie_id=?`;
+    const reviewsSql = `SELECT * FROM reviews WHERE movie_id=? ORDER BY created_at DESC`;
 
     // Prima query per il film
     connection.query(sql, [id], (err, results) => {
@@ -44,7 +44,7 @@ function review(req, res) {
 
     const sql = `
     INSERT INTO reviews (movie_id, name, vote, text, created_at) 
-    VALUES (?,?,?,?,CURRENT_TIMESTAMP) 
+    VALUES (?,?,?,?,CURRENT_TIMESTAMP)
     `
 
     connection.query(sql, [movie_id, name, vote, text], (err, result) => {
