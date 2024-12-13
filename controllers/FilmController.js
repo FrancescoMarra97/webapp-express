@@ -38,8 +38,23 @@ function show(req, res) {
     });
 }
 
+function review(req, res) {
+    const movie_id = Number(req.params.id)
+    const { name, vote, text } = req.body
+
+    const sql = `
+    INSERT INTO reviews (movie_id, name, vote, text, created_at) 
+    VALUES (?,?,?,?,CURRENT_TIMESTAMP) 
+    `
+
+    connection.query(sql, [movie_id, name, vote, text], (err, result) => {
+        if (err) return res.status(500).json({ error: err })
+        return res.status(201).json({ success: true })
+    })
+}
 
 module.exports = {
     index,
-    show
+    show,
+    review
 }

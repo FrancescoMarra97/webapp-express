@@ -9,5 +9,6 @@ router.get('/', FilmController.index);
 // un singolo film
 router.get('/:id', FilmController.show)
 
+router.post('/:id/review', FilmController.review)
 
 module.exports = router;
